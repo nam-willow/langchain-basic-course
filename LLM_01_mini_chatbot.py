@@ -61,12 +61,12 @@ history = [{"role": "system",
 
 while True:
     print("------------------------------")
-    promft = input("메시지를 입력하세요: ")
+    prompt = input("메시지를 입력하세요: ")
     
-    if promft.lower() == 'quit':
+    if prompt.lower() == 'quit':
         print("감사합니다. 챗봇을 종료합니다.")
         break
-    history.append({"role": "user" , "content": promft})
+    history.append({"role": "user" , "content": prompt})
     print(chat(history))
 
     
