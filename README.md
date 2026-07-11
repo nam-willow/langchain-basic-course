@@ -13,8 +13,15 @@
 
 ---
 
-## 2번째 코드:
+## 2번째 코드: LangChain 기반 한→영 번역 챗봇
 
+[LLM_02_langchain_translation.py](LLM_02_langchain_translation.py)
+
+- LCEL 방식으로 chain 정의
+- batch를 활용한 병렬 API 호출 (invoke로 선택 가능)
+- StrOutputParser 설정 (JsonOutputParser로 선택 가능)
+
+---
 
 참고강의 : 판다스 스튜디오 — langchain-basic-course
 https://github.com/pandas-studio/langchain-basic-course
