@@ -23,5 +23,14 @@
 
 ---
 
+## 3번째 코드: 구조화 출력 기반 CS 리뷰 티켓 분류
+
+[LLM_03_langchain_cs_analysis.py](LLM_03_langchain_cs_analysis.py)
+
+- Pydantic 스키마(`TicketClassification`) + `with_structured_output`으로 리뷰를 키워드/감정/긴급도/행동제안으로 구조화 추출
+- `batch`로 여러 리뷰를 동시에 처리 (`max_concurrency`, `return_exceptions` 옵션 사용)
+
+---
+
 참고강의 : 판다스 스튜디오 — langchain-basic-course
 https://github.com/pandas-studio/langchain-basic-course
