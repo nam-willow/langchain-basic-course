@@ -32,5 +32,16 @@
 
 ---
 
+## 4번째 코드: 도구 호출 기반 날씨/환율 에이전트
+
+[LLM_04_tool_calling_weather_exchange_agent.py](LLM_04_tool_calling_weather_exchange_agent.py)
+
+- `@tool` 데코레이터로 `get_weather`, `convert_currency` 업무 도구 정의 + `TavilySearch`로 실시간 웹 검색 도구 추가
+- `bind_tools`로 LLM에 도구를 연결하고, `tool_calls` 응답을 직접 순회하며 실행하는 tool calling 루프(`run_tool_loop`) 구현
+- 도구 실행 결과를 `ToolMessage`로 대화 이력에 추가해 LLM이 최종 답변을 생성할 때까지 반복(`max_iter`로 무한 루프 방지)
+- Groq `qwen/qwen3-32b` 모델 사용, `reasoning_effort="none"`으로 `<think>` 토큰 비활성화
+
+---
+
 참고강의 : 판다스 스튜디오 — langchain-basic-course
 https://github.com/pandas-studio/langchain-basic-course
