@@ -55,5 +55,18 @@
 
 ---
 
+## 6번째 코드: 사내 FAQ RAG 파이프라인 (실습 과제)
+
+[LLM_06_workplace_faq_rag.py](LLM_06_workplace_faq_rag.py)
+
+- `TextLoader`로 `data/faq.txt`(사내 총무·시설 안내 문서)를 로드하고 `RecursiveCharacterTextSplitter`(`chunk_size=500`, `chunk_overlap=50`)로 분할
+- Ollama `bge-m3` 임베딩(1024차원)으로 청크를 벡터화해 `FAISS` 인덱스 생성 후 로컬 저장(`example/faiss_index`) 및 재로드
+- `as_retriever(search_type="similarity", search_kwargs={"k": 4})`로 벡터스토어를 리트리버로 변환해 LCEL 체인에 연결
+- `{"context": retriever | format_docs, "question": RunnablePassthrough()} | rag_prompt | llm | StrOutputParser()` 형태로 RAG 체인 구성 — 컨텍스트에 없는 질문은 "찾을 수 없는 정보입니다."로 정직하게 응답하도록 프롬프트 설계
+- 문서 내 질문 / 문서에 없는 질문 / 복합 질문 3가지 케이스로 검증, `retriever.invoke()`로 실제 검색된 문서 개수 확인
+- Google Gemini `gemini-3.1-flash-lite` LLM + Ollama `bge-m3` 임베딩 조합 사용
+
+---
+
 참고강의 : 판다스 스튜디오 — langchain-basic-course
 https://github.com/pandas-studio/langchain-basic-course
