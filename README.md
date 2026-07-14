@@ -43,5 +43,17 @@
 
 ---
 
+## 5번째 코드: create_agent 기반 사내 업무 에이전트 (실습 과제)
+
+[LLM_05_workplace_agent.py](LLM_05_workplace_agent.py)
+
+- `@tool`로 `meeting_room`(회의실 예약 조회), `check_supply_stock`(사무용품 재고), `find_employee_seat`(직원 좌석/내선) 3개 사내 도구 정의 + `TavilySearch` 웹 검색 도구 추가
+- `create_agent` + `MemorySaver`로 에이전트를 구성하고, `thread_id`별로 `invoke`를 호출해 세션 메모리 분리
+- `@dynamic_prompt` 미들웨어와 `UserContext`(`context_schema`)로 호출자 권한(`user`/`admin`)에 따라 시스템 프롬프트를 동적으로 분기 — 관리자는 사번/정책 수치까지 상세 공개, 일반 직원은 요약된 안내만 제공
+- 하나의 질문 안에서 재고 조회 → 내선 조회 → 회의실 예약 조회 → 웹검색까지 여러 도구를 연쇄 호출하도록 설계
+- Google Gemini `gemini-3.1-flash-lite` 모델 사용, `thinking_budget=0`으로 추론 토큰 비활성화
+
+---
+
 참고강의 : 판다스 스튜디오 — langchain-basic-course
 https://github.com/pandas-studio/langchain-basic-course
